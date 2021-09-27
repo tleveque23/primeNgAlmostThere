@@ -1,0 +1,64 @@
+<button pButton (click)="addColumn()">Add a column</button>
+
+<p-table
+  [value]="sales"
+  [scrollable]="true"
+  [scrollHeight]="'300px'"
+  scrollDirection="both"
+  [style]="{ width: 'fit-content', 'max-width': 'calc(100vw - 3rem)' }"
+>
+  <ng-template pTemplate="header">
+    <tr>
+        <th style="width: 68rem" pFrozenColumn>
+          Frozen section
+        </th>
+        <th style="width: calc(100% - 68rem); overflow-x: hidden; max-width: calc(100vw - 72rem)" pFrozenColumn>
+          Results
+        </th>
+    </tr>
+
+    <tr>
+        <th style="width: 30rem" pFrozenColumn>Products</th>
+        <th style="width: 38rem" pFrozenColumn>Years</th>
+        <th style="width: calc(100% - 68rem); overflow-x: hidden; max-width: calc(100vw - 72rem)" pFrozenColumn>&nbsp;</th>
+    </tr>
+
+    <tr>
+      <th style="width: 15rem" pFrozenColumn>Product</th>
+      <th style="width: 15rem" pFrozenColumn>Product 2</th>
+      <th style="width: 7rem" pFrozenColumn>Last Year</th>
+      <th style="width: 7rem" pFrozenColumn>This Year</th>
+      <th style="width: 12rem" pFrozenColumn>Last Year</th>
+      <th style="width: 12rem" pFrozenColumn>This Year</th>
+
+      <ng-container
+        *ngFor="let p of sales[0].result; let i = index; let odd = odd"
+      >
+        <th id="header-month-1" style="width: 10rem">Result {{ i + 1 }}</th>
+      </ng-container>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-sale let-index>
+    <tr>
+      <td style="width: 15rem" pFrozenColumn>{{ sale.product }}</td>
+      <td style="width: 15rem" pFrozenColumn>{{ sale.product }}</td>
+      <td style="width: 7rem" pFrozenColumn>{{ sale.lastYearSale }}%</td>
+      <td style="width: 7rem" pFrozenColumn>{{ sale.thisYearSale }}%</td>
+      <td style="width: 12rem" pFrozenColumn>
+        {{ sale.lastYearProfit | currency: 'USD' }}
+      </td>
+      <td style="width: 12rem" pFrozenColumn>
+        {{ sale.thisYearProfit | currency: 'USD' }}
+      </td>
+
+      <ng-container *ngFor="let r of sale.result; let i = index; let odd = odd">
+        <td style="width: 10rem">
+          {{ r }}
+        </td>
+      </ng-container>
+    </tr>
+  </ng-template>
+</p-table>
+
+
